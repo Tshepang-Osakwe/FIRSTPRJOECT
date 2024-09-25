@@ -11,7 +11,7 @@ import java.util.*;
 public class Login {
 
     public static void main(String[] args) {
-               Scanner take_input = new Scanner(System.in) ;
+             Scanner take_input = new Scanner(System.in) ;
         
     //Prompt the user for firstname, lastname, username and password
     System.out.println("Enter your firstname:");
@@ -27,28 +27,36 @@ public class Login {
     String password = take_input.nextLine();    
    
     checkUsername(username);
-    checkPasswordComplexity(password);
+    checkPasswordComplexity(password); 
+ 
     }
     
- public static void checkUsername(String username){
-  if(username.contains("_" ) && username.length()< 5)
-      System.out.println("Username successfully captured.");
-      
- else {
-    //error message
-    System.out.println("Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length.");
-}
+ public static boolean checkUsername(String username){
+     
+     int maxLength = 5;
+     return username.contains("_") && username.length() <= maxLength;
+
 }
  
- public static void checkPasswordComplexity(String password){
-     if (password.length()<8 && password.matches(".[A-Z].") && password.matches(".\\d.") && password.matches("^a-zA-Z0=9"))
-         System.out.println("Password successfully captured.");
-         
-         else{
-                 System.out.println("Password is not correctly formatted, please ensure that the password contains at least eight characters, a capital letter, a number and a special character. ");
-                 
-     }
- 
+ public static boolean checkPasswordComplexity(String password){
+ return password.length() >= 8 && password.chars().anyMatch(Character::isUpperCase) &&  password.chars().anyMatch(Character::isDigit) && password.chars().anyMatch(ch -> ! Character.isLetterOrDigit(ch));
+    }
+   public  static String registerUser (String username, String password){
+        if (!checkUsername(username)){
+            return "Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length";
+        }
+        else{
+            return "Username successfully captured.";
+        }
+   
+        if(checkPasswordComplexity(password)){
+            return "Password successfully captured.";
+        }
+        else{
+            return "Password is not correctly formatted, please ensure that the password contains at least eight characters, a capital letter, a number and a special character. ";
+        }
+   }
+   
+   
  }
-}
         
