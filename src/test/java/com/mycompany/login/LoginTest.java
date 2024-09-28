@@ -37,7 +37,7 @@ public class LoginTest {
         System.out.println("loginUser");
         String username = "kyl_1";
         String password = "Ch&&sec@ke99!";
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = Login.loginUser(username, password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -52,7 +52,7 @@ public class LoginTest {
         System.out.println("returnLoginStatus");
         String username = "kyl_1";
         String password = "Ch&&sec@ke99!";
-        String expResult = "kyl_1" + "Ch&&sec@ke99!";
+        String expResult = "Welcome " + username + ", it is great to see you again.";
         String result = Login.returnLoginStatus(username, password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.

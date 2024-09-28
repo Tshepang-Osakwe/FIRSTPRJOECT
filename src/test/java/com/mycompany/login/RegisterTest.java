@@ -25,14 +25,11 @@ public class RegisterTest {
     public void testCheckUsername() {
         System.out.println("checkUsername");
         String username = "kyl_1";
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = Register.checkUsername(username);
         assertEquals(expResult, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        
+        // TODO review the generated test code and remove the default call to fail.  
     }
-
     /**
      * Test of checkPasswordComplexity method, of class Register.
      */
@@ -40,11 +37,10 @@ public class RegisterTest {
     public void testCheckPasswordComplexity() {
         System.out.println("checkPasswordComplexity");
         String password = "Ch&&sec@ke99!";
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = Register.checkPasswordComplexity(password);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        // TODO review the generated test code and remove the default call to fail
     }
 
     /**
@@ -55,11 +51,11 @@ public class RegisterTest {
         System.out.println("registerUser");
         String username = "kyl_1";
         String password = "Ch&&sec@ke99!";
-        String expResult = "kyl_1" + "Ch&&sec@ke99!";
+        String expResult = "Username successfully captured.\nPassword successfully captured.";
         String result = Register.registerUser(username, password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+ 
     }
     
 }
