@@ -38,7 +38,10 @@ public class Login {
         String result = register.registerUser(username, password);
         System.out.println(result);
         
-       
+           if (result.contains("successfully captured")) {
+            registeredUsername = username;
+            registeredPassword = password;
+        }
         // If registration is successful, store the registered username and password
        
  // Call the method and print the return value to verify login status
@@ -46,15 +49,9 @@ public class Login {
       
     }
      public static boolean loginUser(String username, String password) {
-        // Debugging: Print out the values being compared
-      /*  System.out.println("Attempting login with:");
-        System.out.println("Entered Username: " + username);
-        System.out.println("Entered Password: " + password);
-        System.out.println("Registered Username: " + registeredUsername);
-        System.out.println("Registered Password: " + registeredPassword);*/
-
-        // Check if the entered username and password match the registered ones
-        return registeredUsername.equals(username) && registeredPassword.equals(password);
+        return registeredUsername != null && registeredPassword != null 
+                && registeredUsername.equals(username) 
+                && registeredPassword.equals(password);
     }
 
 
