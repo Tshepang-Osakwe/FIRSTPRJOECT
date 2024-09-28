@@ -11,8 +11,8 @@ package com.mycompany.login;
 public class Register {
  
 // Instance variables for username and password
- private String username = "kyl_1";
- private String password = "Ch&&sec@ke99!";
+ private String username;
+ private String password;
    // Constructor for initializing password and username
     public Register(String username, String password) {
         this.username = username;
