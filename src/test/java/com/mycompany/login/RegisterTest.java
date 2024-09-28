@@ -15,48 +15,51 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author RC_Student_lab
  */
-public class LoginTest {
+public class RegisterTest {
     
-    public LoginTest() {
+    public RegisterTest() {
     }
+    
    
     @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        Login.main(args);
+    public void testCheckUsername() {
+        System.out.println("checkUsername");
+        String username = "kyl_1";
+        boolean expResult = false;
+        boolean result = Register.checkUsername(username);
+        assertEquals(expResult, result);
+        
         // TODO review the generated test code and remove the default call to fail.
-       
+        
     }
 
     /**
-     * Test of loginUser method, of class Login.
+     * Test of checkPasswordComplexity method, of class Register.
      */
     @Test
-    public void testLoginUser() {
-        System.out.println("loginUser");
-        String username = "kyl_1";
+    public void testCheckPasswordComplexity() {
+        System.out.println("checkPasswordComplexity");
         String password = "Ch&&sec@ke99!";
         boolean expResult = false;
-        boolean result = Login.loginUser(username, password);
+        boolean result = Register.checkPasswordComplexity(password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-       
+        
     }
 
     /**
-     * Test of returnLoginStatus method, of class Login.
+     * Test of registerUser method, of class Register.
      */
     @Test
-    public void testReturnLoginStatus() {
-        System.out.println("returnLoginStatus");
+    public void testRegisterUser() {
+        System.out.println("registerUser");
         String username = "kyl_1";
         String password = "Ch&&sec@ke99!";
         String expResult = "kyl_1" + "Ch&&sec@ke99!";
-        String result = Login.returnLoginStatus(username, password);
+        String result = Register.registerUser(username, password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-      
+        fail("The test case is a prototype.");
     }
     
 }

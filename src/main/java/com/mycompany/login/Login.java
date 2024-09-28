@@ -4,15 +4,15 @@
 
 package com.mycompany.login;
 import java.util.*;
-import java.util.HashMap;
-import java.util.Map;
 /**
  *
  * @author RC_Student_lab
  */
 public class Login {
-      // Static map to store usernames and passwords for registered users
-private static Map<String, String> userDatabase = new HashMap<>();
+      // Static variables to hold the registered username and password
+    private static String registeredUsername;
+    private static String registeredPassword;
+    
     public static void main(String[] args) {
          // Created a scanner object to take input from the user
              Scanner take_input = new Scanner(System.in) ;
@@ -26,7 +26,8 @@ private static Map<String, String> userDatabase = new HashMap<>();
     
     System.out.println("Enter your username:");
     String username = take_input.nextLine();
-        System.out.println("Enter your password:");
+    
+    System.out.println("Enter your password:");
     String password = take_input.nextLine();
         
   
@@ -37,26 +38,35 @@ private static Map<String, String> userDatabase = new HashMap<>();
         String result = register.registerUser(username, password);
         System.out.println(result);
         
-          // Test login
-        System.out.println(returnLoginStatus(username, password));
-
+       
+        // If registration is successful, store the registered username and password
+       
+ // Call the method and print the return value to verify login status
+       System.out.println(returnLoginStatus(username, password));
       
     }
-    // Check if the login details are correct and return appropriate message
-public static boolean loginUser(String username, String password) {
-     // Check if the username exists in the user database and if the password matches
-        return userDatabase.containsKey(username) && userDatabase.get(username).equals(password);
+     public static boolean loginUser(String username, String password) {
+        // Debugging: Print out the values being compared
+      /*  System.out.println("Attempting login with:");
+        System.out.println("Entered Username: " + username);
+        System.out.println("Entered Password: " + password);
+        System.out.println("Registered Username: " + registeredUsername);
+        System.out.println("Registered Password: " + registeredPassword);*/
+
+        // Check if the entered username and password match the registered ones
+        return registeredUsername.equals(username) && registeredPassword.equals(password);
     }
+
+
     //  Returns a message indicating the login status based on the provided username and password.
-    public static String returnLoginStatus(String username, String password) {
-         // Check if the login details are correct and return appropriate message
+   public static String returnLoginStatus(String username, String password) {
+        // Check if the login details are correct and return appropriate message
         if (loginUser(username, password)) {
-            return "Welcome" + username + "it is great to see you again."  ;
-        } else {
+            return "Welcome " + username + ", it is great to see you again.";
+        }
+        else{
             return "Username or password incorrect, please try again.";
         }
-    }
-   
-   
- }
-        
+   }
+
+}
