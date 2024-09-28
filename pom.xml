@@ -31,5 +31,5 @@
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>com.mycompany.login.Login</exec.mainClass>
     </properties>
-    <name>ST10449833, POE.PT1</name>
+    <name>Login</name>
 </project>
