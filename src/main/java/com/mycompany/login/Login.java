@@ -9,9 +9,7 @@ import java.util.*;
  * @author RC_Student_lab
  */
 public class Login {
-      // Static variables to hold the registered username and password
-    private static String registeredUsername;
-    private static String registeredPassword;
+   
     
     public static void main(String[] args) {
          // Created a scanner object to take input from the user
@@ -30,40 +28,27 @@ public class Login {
     System.out.println("Enter your password:");
     String password = take_input.nextLine();
         
-  
-    // Create an instance of Register with the username and password
-        Register register = new Register(username, password);
+     // Create an instance of Register with the username and password
+        Register register = new Register(username, password, firstname, lastname);
         
         // Call the method to register the user and print the result
-        String result = register.registerUser(username, password);
-        System.out.println(result);
+        String registrationResult = Register.registerUser(username, password);
+        System.out.println(registrationResult);
         
-           if (result.contains("successfully captured")) {
-            registeredUsername = username;
-            registeredPassword = password;
-        }
-        // If registration is successful, store the registered username and password
+     
+        // Prompt the user for login credentials
+        System.out.println("Please log in:");
+        System.out.println("Enter your username:");
+        String loginUsername = take_input.nextLine();
+        
+        System.out.println("Enter your password:");
+        String loginPassword = take_input.nextLine();
+        
+        // Verify the login credentials and print the login status
        
- // Call the method and print the return value to verify login status
-       System.out.println(returnLoginStatus(username, password));
-      
+       String loginStatus = register.returnLoginStatus(loginUsername, loginPassword);
+        System.out.println(loginStatus);
     }
-     public static boolean loginUser(String username, String password) {
-        return registeredUsername != null && registeredPassword != null 
-                && registeredUsername.equals(username) 
-                && registeredPassword.equals(password);
-    }
-
-
-    //  Returns a message indicating the login status based on the provided username and password.
-   public static String returnLoginStatus(String username, String password) {
-        // Check if the login details are correct and return appropriate message
-        if (loginUser(username, password)) {
-            return "Welcome " + username + ", it is great to see you again.";
-        }
-        else{
-            return "Username or password incorrect, please try again.";
-        }
-   }
+   
 
 }
