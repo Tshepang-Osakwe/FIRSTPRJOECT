@@ -58,4 +58,38 @@ public class RegisterTest {
  
     }
     
+     @Test
+    public void testLoginUser() {
+        System.out.println("loginUser");
+        String username = "kyl_1";
+        String password = "Ch&&sec@ke99!";
+        Register.setRegisteredUsername(username);
+    Register.setRegisteredPassword(password);
+        boolean expResult = true;
+         boolean result = Register.loginUser(username, password);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       
+    }
+
+    /**
+     * Test of returnLoginStatus method, of class Login.
+     */
+    @Test
+    public void testReturnLoginStatus() {
+        System.out.println("returnLoginStatus");
+        String username = "kyl_1";
+        String password = "Ch&&sec@ke99!";
+           String firstname = "Kyle";  // Set the expected first name
+    String lastname = "Smith";  // Set the expected last name
+        String expResult = "Welcome " + firstname + " " + lastname + ", it is great to see you again.";
+       Register register = new Register(username, password, firstname, lastname);
+        Register.setRegisteredUsername(username);
+    Register.setRegisteredPassword(password);
+
+    String result = register.returnLoginStatus(username, password);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+      
+    }
 }
