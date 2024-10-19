@@ -3,52 +3,69 @@
  */
 
 package com.mycompany.login;
-import java.util.*;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author RC_Student_lab
  */
 public class Login {
-   
+     
     
     public static void main(String[] args) {
-         // Created a scanner object to take input from the user
-             Scanner take_input = new Scanner(System.in) ;
-   
-   //Prompt the user for firstname, lastname, username and password
-    System.out.println("Enter your firstname:");
-    String firstname = take_input.nextLine();
-    
-    System.out.println("Enter your lastname:");
-    String lastname = take_input.nextLine();
-    
-    System.out.println("Enter your username:");
-    String username = take_input.nextLine();
-    
-    System.out.println("Enter your password:");
-    String password = take_input.nextLine();
-        
-     // Create an instance of Register with the username and password
-        Register register = new Register(username, password, firstname, lastname);
-        
-        // Call the method to register the user and print the result
-        String registrationResult = Register.registerUser(username, password);
-        System.out.println(registrationResult);
-        
-     
-        // Prompt the user for login credentials
-        System.out.println("Please log in:");
-        System.out.println("Enter your username:");
-        String loginUsername = take_input.nextLine();
-        
-        System.out.println("Enter your password:");
-        String loginPassword = take_input.nextLine();
-        
-        // Verify the login credentials and print the login status
-       
-       String loginStatus = register.returnLoginStatus(loginUsername, loginPassword);
-        System.out.println(loginStatus);
-    }
-   
+         // Prompt the user for first name, last name, username, and password using JOptionPane
+        String firstname = JOptionPane.showInputDialog(null, "Enter your first name:");
+        String lastname = JOptionPane.showInputDialog(null, "Enter your last name:");
+        String username = JOptionPane.showInputDialog(null, "Enter your username:");
+        String password = JOptionPane.showInputDialog(null, "Enter your password:");
 
+        // Create an instance of Register with the username, password, first name, and last name
+        Register register = new Register(username, password, firstname, lastname);
+
+        // Call the method to register the user and show the result using JOptionPane
+        String registrationResult = Register.registerUser(username, password);
+        JOptionPane.showMessageDialog(null, registrationResult);
+
+        // Check if registration was successful before proceeding to login
+        if (!registrationResult.contains("successfully")) {
+            JOptionPane.showMessageDialog(null, "Registration failed. Please check your username and password format.");
+            System.exit(0);  // Exit if registration fails
+        }
+
+        // Prompt the user for login credentials using JOptionPane
+        String loginUsername = JOptionPane.showInputDialog(null, "Enter your username for login:");
+        String loginPassword = JOptionPane.showInputDialog(null, "Enter your password for login:");
+
+        // Verify the login credentials and show the login status using JOptionPane
+        String loginStatus = register.returnLoginStatus(loginUsername, loginPassword);
+        JOptionPane.showMessageDialog(null, loginStatus);
+
+        // Proceed if login is successful
+        if (loginStatus.startsWith("Welcome")) {
+            JOptionPane.showMessageDialog(null, "Welcome to EasyKanban!");
+
+            // Main menu loop
+            while (true) {
+                String menuOption = JOptionPane.showInputDialog(null,
+                        "Select an option:\n1) Add Tasks\n2) Show Report (Coming Soon)\n3) Quit");
+                switch (menuOption) {
+                    case "1":
+                        Task.addTasks();  // Call method from Task class to add tasks
+                        break;
+                    case "2":
+                        JOptionPane.showMessageDialog(null, "Coming Soon");
+                        break;
+                    case "3":
+                        JOptionPane.showMessageDialog(null, "Exiting application. Total task hours: " + Task.returnTotalHours() + " hours.");
+                        System.exit(0);
+                    default:
+                        JOptionPane.showMessageDialog(null, "Invalid option! Please select again.");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Login failed! Exiting application.");
+            System.exit(0);  // Exit after failed login
+        }
+    }
 }
