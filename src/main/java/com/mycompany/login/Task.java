@@ -20,8 +20,8 @@ public class Task {
     private String taskID;
     private String taskStatus;
     private static ArrayList<Task> tasks = new ArrayList<>();
-    private static int totalHours = 0;
-    private static int taskCounter = 0;
+    static int totalHours = 0;
+     static int taskCounter = 0;
 
     // Constructor
     public Task(String taskName, String taskDescription, String developerDetails, int taskDuration, String taskStatus) {
