@@ -38,7 +38,10 @@ public class Login {
         // Call the method to register the user and print the result
         String registrationResult = Register.registerUser(username, password);
         System.out.println(registrationResult);
-        
+          if (!registrationResult.contains("successfully")) {
+            System.out.println("Registration failed. Please check your username and password format.");
+            System.exit(0);  // Exit if registration fails
+        }
      
         // Prompt the user for login credentials
         System.out.println("Please log in:");
