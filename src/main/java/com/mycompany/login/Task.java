@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author RC_Student_lab
  */
 
-public class Task {
+public  class Task {
      private String taskName;
     private int taskNumber;
     private String taskDescription;
@@ -47,7 +47,7 @@ public class Task {
     }
 
     // Method to print task details
-    public String printTaskDetails() {
+    public  String printTaskDetails() {
         return "Task Status: " + taskStatus + "\n" +
                 "Developer: " + developerDetails + "\n" +
                 "Task Number: " + taskNumber + "\n" +
@@ -62,18 +62,23 @@ public class Task {
         return totalHours;
     }
 
-    // Add task method
+    
+    /**
+     * Prompts the user to add multiple tasks and stores them in the static tasks list.
+     * Each task requires user input for name, description, developer name, duration, and status.
+     */
     public static void addTasks() {
         int numTasks = Integer.parseInt(JOptionPane.showInputDialog("How many tasks do you want to add?"));
 
         for (int i = 0; i < numTasks; i++) {
+             // Input task details from user
             String taskName = JOptionPane.showInputDialog("Enter Task Name:");
             String taskDescription = JOptionPane.showInputDialog("Enter Task Description (max 50 characters):");
 
             // Check if description is valid
             if (taskDescription.length() > 50) {
                 JOptionPane.showMessageDialog(null, "Task description too long! Please enter less than 50 characters.");
-                i--;  // Retry task input
+                i--;   // Retry task input if description is invalid
                 continue;
             }
 
@@ -81,7 +86,7 @@ public class Task {
               String[] nameParts = developerDetails.split(" ");
         if (nameParts.length < 2) {
             JOptionPane.showMessageDialog(null, "Please provide both first and last name.");
-            i--;  // Retry task input
+            i--;   // Retry task input if developer name format is invalid
             continue;
         }
         
@@ -112,7 +117,7 @@ public class Task {
             // Display task details
             JOptionPane.showMessageDialog(null, newTask.printTaskDetails());
         }
-
+// Show total hours of all tasks added
         JOptionPane.showMessageDialog(null, "All tasks added successfully! Total hours: " + returnTotalHours());
     }
 }
