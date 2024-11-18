@@ -11,32 +11,20 @@ public class Login {
         dialog.setAlwaysOnTop(true);
 
         // Registration process
-        String registrationResult;
-        while (true) {
-            System.out.println("======== Register Your Account ========");
-            System.out.println("Enter your firstname: ");
-            String firstname = take_input.nextLine();
+        System.out.println("======== Register Your Account ========");
+        System.out.print("Enter your firstname: ");
+        String firstname = take_input.nextLine();
 
-            System.out.println("Enter your lastname: ");
-            String lastname = take_input.nextLine();
+        System.out.print("Enter your lastname: ");
+        String lastname = take_input.nextLine();
 
-            System.out.println("Enter your username: ");
-            String username = take_input.nextLine();
+        System.out.print("Enter your username: ");
+        String username = take_input.nextLine();
 
-            System.out.println("Enter your password: ");
-            String password = take_input.nextLine();
+        System.out.print("Enter your password: ");
+        String password = take_input.nextLine();
 
-            // Attempt to register the user
-            registrationResult = Register.registerUser(username, password, firstname, lastname);
-            System.out.println(registrationResult);
-
-            if (registrationResult.contains("successfully")) {
-                break;
-            } else {
-                System.out.println("Registration failed! Please try again.");
-                System.exit(0); // Exit the program immediately if registration fails
-            }
-        }
+        System.out.println("Registration successful! Welcome, " + firstname + " " + lastname + ".");
 
         // Login process
         System.out.println("======== Log In to Your Account ========");
@@ -47,8 +35,7 @@ public class Login {
             System.out.print("Enter your password: ");
             String loginPassword = take_input.nextLine();
 
-            // Validate login credentials
-            if (Register.loginUser(loginUsername, loginPassword)) {
+            if (loginUsername.equals(username) && loginPassword.equals(password)) {
                 System.out.println("Login successful!");
                 JOptionPane.showMessageDialog(null, "Welcome to EasyKanban!");
                 break;
@@ -62,14 +49,14 @@ public class Login {
             String menuOption = JOptionPane.showInputDialog(null,
                     "Select an option:\n1) Add Tasks\n2) Show Report\n3) Quit");
 
-            if (menuOption == null) { // Handle cancellation
+            if (menuOption == null) {
                 JOptionPane.showMessageDialog(null, "Exiting application.");
                 System.exit(0);
             }
 
             switch (menuOption) {
                 case "1":
-                    Task.addTasks(); // Add tasks
+                    Task.addTasks();
                     break;
                 case "2":
                     String reportOption = JOptionPane.showInputDialog(null,
@@ -120,21 +107,5 @@ public class Login {
                     JOptionPane.showMessageDialog(null, "Invalid option! Please select again.");
             }
         }
-    }
-}
-
-// Placeholder Register class for validation
-class Register {
-    public static String registerUser(String username, String password, String firstname, String lastname) {
-        // Simulated registration logic
-        if (username != null && password != null && !username.isEmpty() && !password.isEmpty()) {
-            return "User registered successfully!";
-        }
-        return "Registration failed. Invalid input.";
-    }
-
-    public static boolean loginUser(String username, String password) {
-        // Simulated login validation
-        return username.equals("testUser") && password.equals("testPass");
     }
 }
