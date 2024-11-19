@@ -7,17 +7,17 @@ import java.util.ArrayList;
  * Task class to manage tasks for the application.
  */
 public class Task {
-    private String taskName;
-    private int taskNumber;
-    private String taskDescription;
-    private String developerDetails;
-    private int taskDuration;
-    private String taskID;
-    private String taskStatus;
+     String taskName;
+   int taskNumber;
+     String taskDescription;
+     String developerDetails;
+     int taskDuration;
+     String taskID;
+     String taskStatus;
 
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static int totalHours = 0;
-    private static int taskCounter = 0;
+  static ArrayList<Task> tasks = new ArrayList<>();
+  static int totalHours = 0;
+ static int taskCounter = 0;
 
     // Constructor
     public Task(String taskName, String taskDescription, String developerDetails, int taskDuration, String taskStatus) {
@@ -181,13 +181,13 @@ public class Task {
             return;
         }
 
-        StringBuilder result = new StringBuilder("Tasks for Developer: " + developer + "\n");
+        StringBuilder result = new StringBuilder("Tasks for Developer: " + developer + "are not found.");
         for (Task task : tasks) {
             if (task.developerDetails.equalsIgnoreCase(developer)) {
                 result.append(task.printTaskDetails()).append("\n");
             }
         }
-        JOptionPane.showMessageDialog(null, result.length() > 0 ? result.toString() : "No tasks found for developer: " + developer);
+        JOptionPane.showMessageDialog(null, result.length() > 0 ? result.toString() : "No tasks found for developer: " + developer );
     }
 
     // Display a detailed report of all tasks
