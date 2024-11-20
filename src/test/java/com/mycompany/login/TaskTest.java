@@ -34,11 +34,13 @@ public class TaskTest {
 
     @Test
     public void testReturnTotalHours() {
-        Task task1 = new Task("Login Feature", "Create login to authenticate users", "Robyn Harrison", 8, "To Do");
-        Task task2 = new Task("Add Task Feature", "Create Add Task feature to add users", "Mike Smith", 10, "Doing");
+        Task.totalHours = 0;
+        Task.taskCounter = 0;
 
-        int expectedTotalHours = 18; // 8 + 10
-        assertEquals(expectedTotalHours, Task.returnTotalHours(), "Total task hours should be correct.");
+        new Task("Login Feature", "Create login to authenticate users", "Robyn Harrison", 8, "To Do");
+        new Task("Add Task Feature", "Create Add Task feature to add users", "Mike Smith", 10, "Doing");
+
+        assertEquals(18, Task.returnTotalHours(), "Total task hours should be the sum of all task durations.");
     }
 
     @Test
@@ -58,75 +60,72 @@ public class TaskTest {
 
     @Test
     public void testArrayPopulation() {
-        Task task1 = new Task("Task 1", "Description 1", "Developer A", 5, "To Do");
-        Task task2 = new Task("Task 2", "Description 2", "Developer B", 8, "Doing");
-        Task task3 = new Task("Task 3", "Description 3", "Developer C", 2, "Done");
+         Task task1 = new Task("Create Login", "Create login functionality", "Mike Smith", 5, "To Do");
+        Task task2 = new Task("Create Add Features", "Add new features to the system", "Edward Harrison", 8, "Doing");
+        Task task3 = new Task("Create Reports", "Generate reports", "Samantha Paulson", 2, "Done");
+        Task task4 = new Task("Add Arrays", "Work with array data structures", "Glenda Oberholzer", 11, "To Do");
 
         Task.tasks.add(task1);
         Task.tasks.add(task2);
         Task.tasks.add(task3);
+        Task.tasks.add(task4);
 
-        assertEquals(3, Task.tasks.size(), "Task list size is incorrect.");
-        assertEquals(15, Task.tasks.stream().mapToInt(t -> t.taskDuration).sum(), "Total task durations should be correct.");
+        assertEquals(4, Task.tasks.size(), "The task list size should be 4.");
+        assertEquals(26, Task.tasks.stream().mapToInt(t -> t.taskDuration).sum(), "Total task duration should be 26.");
     }
 
     @Test
     public void testDisplayDoneTasks() {
-        Task task1 = new Task("Task A", "Short task", "Alice Bobson", 5, "Done");
-        Task task2 = new Task("Task B", "Another task", "Charlie Dan", 7, "To Do");
-
-        Task.tasks.add(task1);
-        Task.tasks.add(task2);
+         Task.tasks.add(new Task("Create Reports", "Generate reports", "Samantha Paulson", 2, "Done"));
+        Task.tasks.add(new Task("Add Arrays", "Work with array data structures", "Glenda Oberholzer", 11, "To Do"));
 
         long doneTasksCount = Task.tasks.stream()
                 .filter(task -> "Done".equalsIgnoreCase(task.taskStatus))
                 .count();
 
-        assertEquals(1, doneTasksCount, "Count of 'Done' tasks is incorrect.");
+        assertEquals(1, doneTasksCount, "There should be 1 task with status 'Done'.");
     }
 
     @Test
     public void testLongestTask() {
-        Task task1 = new Task("Task X", "Short task", "John Doe", 3, "To Do");
-        Task task2 = new Task("Task Y", "Longer task", "Jane Smith", 10, "Doing");
-
-        Task.tasks.add(task1);
-        Task.tasks.add(task2);
+         Task.tasks.add(new Task("Create Login", "Create login functionality", "Mike Smith", 5, "To Do"));
+        Task.tasks.add(new Task("Add Arrays", "Work with array data structures", "Glenda Oberholzer", 11, "To Do"));
 
         Task longestTask = Task.tasks.stream()
                 .max((t1, t2) -> Integer.compare(t1.taskDuration, t2.taskDuration))
                 .orElse(null);
 
-        assertEquals("Task Y", longestTask.taskName, "Longest task name should match.");
+        assertEquals("Add Arrays", longestTask.taskName, "The longest task should be 'Add Arrays'.");
     }
 
     @Test
     public void testSearchTaskByName() {
-        Task task1 = new Task("Login Feature", "Create Login", "Alice Bobson", 8, "To Do");
-        Task task2 = new Task("Add Feature", "Create Add Task feature", "Mike Smith", 10, "Doing");
+         // Clear the static task list before testing
+    Task.tasks.clear();
 
-        Task.tasks.add(task1);
-        Task.tasks.add(task2);
+    // Populate the task list with test data
+    Task.tasks.add(new Task("Create Login", "Create login functionality", "Mike Smith", 5, "To Do"));
+    Task.tasks.add(new Task("Create Add Features", "Add new features to the system", "Edward Harrison", 8, "Doing"));
 
-        boolean found = Task.tasks.stream()
-                .anyMatch(task -> task.taskName.equalsIgnoreCase("Login Feature"));
+    // Expected and actual results
+    boolean expectedResult = true; // We expect "Create Login" to exist
+    boolean actualResult = Task.tasks.stream()
+            .anyMatch(task -> task.taskName.equalsIgnoreCase("Create Login"));
 
-        assertEquals(true, found, "Task search should find an existing task by name.");
+    // Validate using assertEquals
+    assertEquals(expectedResult, actualResult, "The task 'Create Login' should exist.");
     }
 
     @Test
     public void testSearchTasksByDeveloper() {
-        Task task1 = new Task("Task 1", "First task", "Nancy Drew", 4, "To Do");
-        Task task2 = new Task("Task 2", "Second task", "Nancy Drew", 6, "Done");
-
-        Task.tasks.add(task1);
-        Task.tasks.add(task2);
+       Task.tasks.add(new Task("Create Reports", "Generate reports", "Samantha Paulson", 2, "Done"));
+        Task.tasks.add(new Task("Create Login", "Create login functionality", "Mike Smith", 5, "To Do"));
 
         long developerTasks = Task.tasks.stream()
-                .filter(task -> "Nancy Drew".equalsIgnoreCase(task.developerDetails))
+                .filter(task -> "Mike Smith".equalsIgnoreCase(task.developerDetails))
                 .count();
 
-        assertEquals(2, developerTasks, "Tasks by the developer should be correctly counted.");
+        assertEquals(1, developerTasks, "Mike Smith should have 1 task assigned.");
     }
 
     @Test
@@ -158,4 +157,8 @@ public class TaskTest {
         assertEquals(true, report.toString().contains("Developer X"), "Developer X should be in the report.");
         assertEquals(true, report.toString().contains("Developer Y"), "Developer Y should be in the report.");
     }
-}
+   
+    }
+
+
+
