@@ -181,7 +181,7 @@ public class Task {
             return;
         }
 
-        StringBuilder result = new StringBuilder("Tasks for Developer: " + developer + "are not found.");
+        StringBuilder result = new StringBuilder("Tasks for Developer: " + developer );
         for (Task task : tasks) {
             if (task.developerDetails.equalsIgnoreCase(developer)) {
                 result.append(task.printTaskDetails()).append("\n");
